@@ -37,7 +37,7 @@
     "startExpress": "node src/bin/www.js",
     "devStart": "nodemon server.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "start": "babel-node src/bin/www --experimental-modules --es-module-specifier-resolution=node",
+    "start": "node src/bin/www",
     "server2": "node src/bin/www.js",
     "server": "nodemon --exec NODE_ENV=development babel-node src/bin/www --experimental-modules --es-module-specifier-resolution=node",
     "dev": "NODE_ENV=development npm run server"
