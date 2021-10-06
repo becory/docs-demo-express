@@ -38,6 +38,7 @@
     "startExpress": "node src/bin/www.js",
     "devStart": "nodemon server.js",
     "test": "echo \"Error: no test specified\" && exit 1",
+    "build": "sequelize db:migrate --env production",
     "start": "babel-node src/bin/www.js --experimental-modules --es-module-specifier-resolution=node",
     "server2": "node src/bin/www.js",
     "server": "nodemon --exec NODE_ENV=development babel-node src/bin/www --experimental-modules --es-module-specifier-resolution=node",

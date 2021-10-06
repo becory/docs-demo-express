@@ -19,8 +19,11 @@ module.exports = {
         logging: false,
         "dialect": "postgres",
         "protocol": "postgres",
-        "dialectOptions": {
-            "ssl": true
+        dialectOptions: {
+            ssl: {
+                require: true,
+                rejectUnauthorized: false // <<<<<< YOU NEED THIS
+            }
         },
         "salt": process.env.SALT
     }
