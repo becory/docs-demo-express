@@ -26,7 +26,7 @@ app.set('port', port);
 const server = http.createServer(app);
 
 const socketCorsOptions = {
-    origin: ['http://localhost:3000'],
+    origin: [process.env.CORS_URL],
     methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE', 'OPTIONS'],
     optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
 }

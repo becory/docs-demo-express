@@ -32,7 +32,7 @@ const app = express();
 dotenv.config({path: path.resolve(__dirname, `../.env.${process.env.NODE_ENV}`)});
 
 const corsOptions = {
-    origin: '*',
+    origin: process.env.CORS_URL,
     // 'http://localhost:3000'
     methods: ['GET', 'HEAD', 'PUT', 'PATCH', 'POST', 'DELETE', 'OPTIONS'],
     optionsSuccessStatus: 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
