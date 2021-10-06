@@ -16,7 +16,8 @@ module.exports = {
     },
     "production": {
         "use_env_variable": "DATABASE_URL",
-        ssl: {rejectUnauthorized: false},
+        logging: false,
+        ssl: { rejectUnauthorized: false },
         "salt": process.env.SALT
     }
 }
