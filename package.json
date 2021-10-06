@@ -40,8 +40,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "clean": "rm -rf build && mkdir build",
     "build-babel": "babel -d ./build ./src -s",
-    "build": "npm run clean && npm run build-babel",
-    "start": "npm run build && node ./build/bin/www.js",
+    "build": "yarn install && yarn run clean && yarn run build-babel",
+    "start": "yarn run build && node ./build/bin/www.js",
     "server2": "node src/bin/www.js",
     "server": "nodemon --exec NODE_ENV=development babel-node src/bin/www --experimental-modules --es-module-specifier-resolution=node",
     "dev": "NODE_ENV=development npm run server"
