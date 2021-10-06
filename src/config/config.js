@@ -17,7 +17,11 @@ module.exports = {
     "production": {
         "use_env_variable": "DATABASE_URL",
         logging: false,
-        ssl: { rejectUnauthorized: false },
+        "dialect": "postgres",
+        "protocol": "postgres",
+        "dialectOptions": {
+            "ssl": true
+        },
         "salt": process.env.SALT
     }
 }
