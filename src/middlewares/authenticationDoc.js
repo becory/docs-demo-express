@@ -25,7 +25,7 @@ const authenticationDoc = async (req, res, next) => {
                     res.locals.login_user = 'Guest'
                     return next();
                 } else {
-                    return res.status(401).json({message: 'Unauthorized!'});
+                    return res.status(401).json({msg: 'Unauthorized!'});
                 }
             }
         });
@@ -42,7 +42,7 @@ const authenticationDoc = async (req, res, next) => {
             res.locals.login_user = 'Guest'
             return next();
         } else {
-            return res.status(401).json({message: 'Unauthorized!'});
+            return res.status(401).json({msg: 'Unauthorized!'});
         }
     }
 };

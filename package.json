@@ -42,7 +42,6 @@
     "migrate": "sequelize db:migrate --env production --config src/config/config.js --migrations-path src/migrations",
     "seeds": "sequelize db:seed:all --env production --config src/config/config.js --seeders-path src/seeders",
     "start": "babel-node src/bin/www.js --experimental-modules --es-module-specifier-resolution=node",
-    "server2": "node src/bin/www.js",
     "server": "nodemon --exec NODE_ENV=development babel-node src/bin/www --experimental-modules --es-module-specifier-resolution=node",
     "dev": "NODE_ENV=development npm run server"
   },

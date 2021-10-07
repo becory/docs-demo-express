@@ -49,6 +49,7 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, '../public')));
 
 export let userMap = new UserMap(1000 * 60 * 3)
+let userOnlineMap = new UserActionMap(1000 * 60 * 3, "user")
 let cursorMap = new UserActionMap(1000 * 60 * 3, "cursor")
 let selectionMap = new UserActionMap(1000 * 60 * 3, "range")
 
@@ -144,16 +145,17 @@ io.on('connection', function (socket) {
                 ],
                 subQuery: false
             });
-            console.log(doc)
             if (!doc) {
                 return socket.emit('error', {status: '404'})
             }
+            const now = new Date()
             if (!userMap.getUser(login_user)) {
-                const now = new Date()
                 userMap.create(login_user, now)
             }
+            userOnlineMap.create(uuid, now)
+            userOnlineMap.update(uuid, {...userMap.getUser(login_user), user: {}, time: new Date()})
             socket.join(uuid)
-            socket.emit('receive-users', userMap.getData())
+            socket.emit('receive-users', userOnlineMap.getResult(uuid, now))
             socket.emit("load-document", {
                 content: doc.content,
                 updated: doc.updatedAt,
@@ -172,7 +174,10 @@ io.on('connection', function (socket) {
             include: [{model: User, as: 'creator'}]
         })
         const docUpdate = await doc.update({content: delta.data})
-        socket.broadcast.to(uuid).emit('receive-users', userMap.getData())
+        const now = new Date()
+        userOnlineMap.create(uuid, now)
+        userOnlineMap.update(uuid, {...userMap.getUser(login_user), user: {}, time: new Date()})
+        socket.broadcast.to(uuid).emit('receive-users', userOnlineMap.getResult(uuid, now))
         socket.emit('receive-updated', {updated: docUpdate.updatedAt, User: login_user})
         socket.broadcast.to(uuid).emit('receive-updated', {updated: docUpdate.updatedAt, User: login_user})
         socket.broadcast.to(uuid).emit("receive-changes", {delta: delta.delta})
@@ -183,9 +188,11 @@ io.on('connection', function (socket) {
         if (!userMap.getUser(login_user)) {
             userMap.create(login_user, now)
         }
+        userOnlineMap.create(uuid, now)
+        userOnlineMap.update(uuid, {...userMap.getUser(login_user), user: {}, time: new Date()})
         cursorMap.create(uuid, now)
         cursorMap.update(uuid, {...userMap.getUser(login_user), ...cursor})
-        socket.broadcast.to(uuid).emit('receive-users', userMap.getData())
+        socket.broadcast.to(uuid).emit('receive-users', userOnlineMap.getResult(uuid, now))
         socket.broadcast.to(uuid).emit("receive-cursor-changes", cursorMap.getResult(uuid, now))
     })
     socket.on("send-selection-changes", selection => {
@@ -193,18 +200,21 @@ io.on('connection', function (socket) {
         if (!userMap.getUser(login_user)) {
             userMap.create(login_user, now)
         }
+        userOnlineMap.create(uuid, now)
+        userOnlineMap.update(uuid, {...userMap.getUser(login_user), user: {}, time: new Date()})
         selectionMap.create(uuid, now)
         selectionMap.update(uuid, {...userMap.getUser(login_user), ...selection})
-        socket.broadcast.to(uuid).emit('receive-users', userMap.getData())
+        socket.broadcast.to(uuid).emit('receive-users', userOnlineMap.getResult(uuid, now))
         socket.broadcast.to(uuid).emit("receive-selection-changes", selectionMap.getResult(uuid, now))
     })
     socket.on('disconnect', function () {
         const now = new Date()
         userMap.removeUser(login_user)
+        userOnlineMap.removeUser(login_user.id)
         cursorMap.removeUser(login_user.id)
         selectionMap.removeUser(login_user.id)
         socket.leave(uuid)
-        socket.broadcast.to(uuid).emit('receive-users', userMap.getData())
+        socket.broadcast.to(uuid).emit('receive-users', userOnlineMap.getResult(uuid, now))
         socket.broadcast.to(uuid).emit("receive-cursor-changes", cursorMap.getResult(uuid, now))
         socket.broadcast.to(uuid).emit("receive-selection-changes", selectionMap.getResult(uuid, now))
     });

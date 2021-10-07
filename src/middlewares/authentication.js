@@ -11,7 +11,7 @@ const authentication = (req, res, next) => {
             res.locals.login_user = decoded
             next();
         } else {
-            return res.status(401).json({ message: 'Unauthorized!' });
+            return res.status(401).json({ msg: 'Unauthorized!' });
         }
     });
 };
