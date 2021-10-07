@@ -38,7 +38,7 @@
     "startExpress": "node src/bin/www.js",
     "devStart": "nodemon server.js",
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "yarn run migrate && yarn run seeds",
+    "build": "yarn run migrate",
     "migrate": "sequelize db:migrate --env production --config src/config/config.js --migrations-path src/migrations",
     "seeds": "sequelize db:seed:all --env production --config src/config/config.js --seeders-path src/seeders",
     "start": "babel-node src/bin/www.js --experimental-modules --es-module-specifier-resolution=node",
