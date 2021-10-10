@@ -1,6 +1,7 @@
 # docs-demo-express
-UI: [Github](https://github.com/becory/docs-demo-ui/)
-API: [Github](https://github.com/becory/docs-demo-express/)
+
+- UI: [Github](https://github.com/becory/docs-demo-ui/)
+- API: [Github](https://github.com/becory/docs-demo-express/)
 
 ## Technical
 
@@ -10,11 +11,15 @@ API: [Github](https://github.com/becory/docs-demo-express/)
 3. Tailwinds (SCSS)
 4. QuillJS (Editor)
 
+Deploy on [Heroku](https://mydocs-demo.herokuapp.com/)
+
 ### API
 1. Express
 2. Sequelize
 3. PostgresSQL
 4. Socket.io
+
+Deploy on [github-pages](https://becory.github.io/docs-demo-ui/)
 
 User story
 ---
