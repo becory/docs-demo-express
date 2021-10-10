@@ -34,34 +34,7 @@ Feature: Users can collaborate each other.
 
 User Flow
 ---
-```mermaid
-graph TB
-  subgraph "Document"
-  Open[Open Document]
-  end
-
-  subgraph "Document List Page"
-  DocListFlow[Document List]
-  DocListFlow --> Create[Create Document]
-  DocListFlow --> Query[Query Login User's Document]
-  Create --> Open
-  Query --> Open
-  end
-
-  subgraph "Login Page"
-  Start(start)
-  Start --> Login
-  Start --> Register
-  Register --> registerForm[/Register Form/]
-  registerForm --> registerOK{Is success?}
-  registerOK -- Yes --> Login
-  registerOK -- No --> Register
-  Login --> loginForm[/fill Username, Password/]
-  loginForm --> login{is Login?}
-  login -- Yes --> DocListFlow[Document List]
-  login -- No --> Start
-end
-```
+[![](https://mermaid.ink/img/eyJjb2RlIjoiZ3JhcGggVEJcbiAgc3ViZ3JhcGggXCJEb2N1bWVudFwiXG4gIE9wZW5bT3BlbiBEb2N1bWVudF1cbiAgZW5kXG5cbiAgc3ViZ3JhcGggXCJEb2N1bWVudCBMaXN0IFBhZ2VcIlxuICBEb2NMaXN0Rmxvd1tEb2N1bWVudCBMaXN0XVxuICBEb2NMaXN0RmxvdyAtLT4gQ3JlYXRlW0NyZWF0ZSBEb2N1bWVudF1cbiAgRG9jTGlzdEZsb3cgLS0-IFF1ZXJ5W1F1ZXJ5IExvZ2luIFVzZXIncyBEb2N1bWVudF1cbiAgQ3JlYXRlIC0tPiBPcGVuXG4gIFF1ZXJ5IC0tPiBPcGVuXG4gIGVuZFxuXG4gIHN1YmdyYXBoIFwiTG9naW4gUGFnZVwiXG4gIFN0YXJ0KHN0YXJ0KVxuICBTdGFydCAtLT4gTG9naW5cbiAgU3RhcnQgLS0-IFJlZ2lzdGVyXG4gIFJlZ2lzdGVyIC0tPiByZWdpc3RlckZvcm1bL1JlZ2lzdGVyIEZvcm0vXVxuICByZWdpc3RlckZvcm0gLS0-IHJlZ2lzdGVyT0t7SXMgc3VjY2Vzcz99XG4gIHJlZ2lzdGVyT0sgLS0gWWVzIC0tPiBMb2dpblxuICByZWdpc3Rlck9LIC0tIE5vIC0tPiBSZWdpc3RlclxuICBMb2dpbiAtLT4gbG9naW5Gb3JtWy9maWxsIFVzZXJuYW1lLCBQYXNzd29yZC9dXG4gIGxvZ2luRm9ybSAtLT4gbG9naW57aXMgTG9naW4_fVxuICBsb2dpbiAtLSBZZXMgLS0-IERvY0xpc3RGbG93W0RvY3VtZW50IExpc3RdXG4gIGxvZ2luIC0tIE5vIC0tPiBTdGFydFxuZW5kIiwibWVybWFpZCI6eyJ0aGVtZSI6ImRlZmF1bHQifSwidXBkYXRlRWRpdG9yIjpmYWxzZSwiYXV0b1N5bmMiOnRydWUsInVwZGF0ZURpYWdyYW0iOmZhbHNlfQ)](https://mermaid-js.github.io/mermaid-live-editor/edit#eyJjb2RlIjoiZ3JhcGggVEJcbiAgc3ViZ3JhcGggXCJEb2N1bWVudFwiXG4gIE9wZW5bT3BlbiBEb2N1bWVudF1cbiAgZW5kXG5cbiAgc3ViZ3JhcGggXCJEb2N1bWVudCBMaXN0IFBhZ2VcIlxuICBEb2NMaXN0Rmxvd1tEb2N1bWVudCBMaXN0XVxuICBEb2NMaXN0RmxvdyAtLT4gQ3JlYXRlW0NyZWF0ZSBEb2N1bWVudF1cbiAgRG9jTGlzdEZsb3cgLS0-IFF1ZXJ5W1F1ZXJ5IExvZ2luIFVzZXIncyBEb2N1bWVudF1cbiAgQ3JlYXRlIC0tPiBPcGVuXG4gIFF1ZXJ5IC0tPiBPcGVuXG4gIGVuZFxuXG4gIHN1YmdyYXBoIFwiTG9naW4gUGFnZVwiXG4gIFN0YXJ0KHN0YXJ0KVxuICBTdGFydCAtLT4gTG9naW5cbiAgU3RhcnQgLS0-IFJlZ2lzdGVyXG4gIFJlZ2lzdGVyIC0tPiByZWdpc3RlckZvcm1bL1JlZ2lzdGVyIEZvcm0vXVxuICByZWdpc3RlckZvcm0gLS0-IHJlZ2lzdGVyT0t7SXMgc3VjY2Vzcz99XG4gIHJlZ2lzdGVyT0sgLS0gWWVzIC0tPiBMb2dpblxuICByZWdpc3Rlck9LIC0tIE5vIC0tPiBSZWdpc3RlclxuICBMb2dpbiAtLT4gbG9naW5Gb3JtWy9maWxsIFVzZXJuYW1lLCBQYXNzd29yZC9dXG4gIGxvZ2luRm9ybSAtLT4gbG9naW57aXMgTG9naW4_fVxuICBsb2dpbiAtLSBZZXMgLS0-IERvY0xpc3RGbG93W0RvY3VtZW50IExpc3RdXG4gIGxvZ2luIC0tIE5vIC0tPiBTdGFydFxuZW5kIiwibWVybWFpZCI6IntcbiAgXCJ0aGVtZVwiOiBcImRlZmF1bHRcIlxufSIsInVwZGF0ZUVkaXRvciI6ZmFsc2UsImF1dG9TeW5jIjp0cnVlLCJ1cGRhdGVEaWFncmFtIjpmYWxzZX0)
 
 ## Data Schema
 ![Data schema](https://i.imgur.com/u4iPBWB.png)
