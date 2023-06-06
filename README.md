@@ -11,7 +11,7 @@
 3. Tailwinds (SCSS)
 4. QuillJS (Editor)
 
-Deploy on [Heroku](https://mydocs-demo.herokuapp.com/)
+Deploy on Google Cloud Run
 
 ### API
 1. Express
