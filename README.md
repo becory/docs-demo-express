@@ -11,15 +11,11 @@
 3. Tailwinds (SCSS)
 4. QuillJS (Editor)
 
-Deploy on Google Cloud Run
-
 ### API
 1. Express
 2. Sequelize
 3. PostgresSQL
 4. Socket.io
-
-Deploy on [github-pages](https://becory.github.io/docs-demo-ui/)
 
 User story
 ---
